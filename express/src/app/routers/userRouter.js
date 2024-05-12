@@ -1,11 +1,14 @@
 import express from 'express';
-import { getUsers, getUserById, createUser } from '../controllers/userController.js';
+import { getUsers, getUserById, createUser, softDeleteUser, updateUser } from '../controllers/userController.js';
 import { validateCreateUser } from '../validators/userValidator.js'
 
 const router = express.Router();
 
-router.get('/', getUsers);
-router.get('/:userId', getUserById);
-router.post('/', validateCreateUser, createUser);
+router
+    .get('/', getUsers)
+    .get('/:userId', getUserById)
+    .post('/create', validateCreateUser, createUser)
+    .delete('/:userId', softDeleteUser)
+    .put('/:userId', updateUser);
 
 export default router;

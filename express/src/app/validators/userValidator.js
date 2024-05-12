@@ -18,14 +18,21 @@ const updateUserSchema = z.object({
     address: z.string().min(1, { message: "Address is required" }),
 })
 
+/**
+ * Middleware function to validate the request body when creating a new user.
+ * 
+ * @param {*} req - Express Request object.
+ * @param {*} res - Express Response object.
+ * @param {*} next - Express Next function.
+ */
 export const validateCreateUser = (req, res, next) => {
     try {
-        // Kiểm tra dữ liệu đầu vào
+        // Check data input
         createUserSchema.parse(req.body);
-        // Nếu dữ liệu hợp lệ, tiếp tục xử lý
+        // If pass, continue.
         next();
     } catch (error) {
-        // Nếu dữ liệu không hợp lệ, trả về lỗi
+        // Handle error.
         res.status(400).json({ error: error.errors });
     }    
 }

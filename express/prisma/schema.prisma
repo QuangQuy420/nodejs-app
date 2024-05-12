@@ -22,6 +22,7 @@ model User {
   avatar    String?   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  deleted   Boolean?  @default(false)
   // Relation 1-1 to Profile.
   profile   Profile?
 }
