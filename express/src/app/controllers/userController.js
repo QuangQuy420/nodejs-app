@@ -13,7 +13,7 @@ export const getUsers = async (req, res) => {
         const users = await userRepository.getAllRecord();
         res.status(200).json(users);
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -29,7 +29,7 @@ export const getUserById = async (req, res) => {
         const user = await userRepository.getByField('id', userId);
         res.status(200).json(user);
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -41,9 +41,10 @@ export const getUserById = async (req, res) => {
  */
 export const createUser = async (req, res) => {
     try {
-        return await userRepository.createUser(req.body, res);
+        const newUser = await userRepository.createUser(req.body);
+        res.status(200).json(newUser);
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -59,7 +60,7 @@ export const softDeleteUser = async (req, res) => {
         const user = await userRepository.softDeleteById(userId);
         res.status(200).json(user);
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -76,6 +77,6 @@ export const updateUser = async (req, res) => {
         const userUpdate = await userRepository.updateUserById(userId, dataUser);
         res.status(200).json(userUpdate);
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: error.message });
     }
 };

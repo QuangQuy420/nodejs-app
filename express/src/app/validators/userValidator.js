@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-// CREATE USER SCHEMA
+// CREATE USER SCHEMA.
 const createUserSchema = z.object({
     name: z.string().min(1, 'Username is required'),
     email: z.string().min(1, 'Email is required'),
@@ -8,7 +8,7 @@ const createUserSchema = z.object({
     passwordConfirm: z.string().min(6, 'Password confirm is required'),
 })
 
-// UPDATE USER SCHEMA
+// UPDATE USER SCHEMA.
 const updateUserSchema = z.object({
     name: z.string().min(1, 'Username is required'),
     role: z.string().min(1, { message: "Role is required" }),
@@ -27,7 +27,7 @@ const updateUserSchema = z.object({
  */
 export const validateCreateUser = (req, res, next) => {
     try {
-        // Check data input
+        // Check data input.
         createUserSchema.parse(req.body);
         // If pass, continue.
         next();

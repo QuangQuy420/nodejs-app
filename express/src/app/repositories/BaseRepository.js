@@ -6,55 +6,43 @@ class BaseRepository {
     /**
      * Get all records from database.
      * 
-     * @returns list of users
+     * @returns list of users.
      */
     async getAllRecord() {
-        try {
-            return this.Model.findMany();
-        } catch (error) {
-            throw new Error('Failed to fetch');
-        }
+        return this.Model.findMany();
     }
 
     /**
      * Handle get a unique record.
      * 
-     * @param {*} field - The field that will query
-     * @param {*} value - Value of above field
-     * @returns 
+     * @param {*} field - The field that will query.
+     * @param {*} value - Value of above field.
+     * @returns - Record.
      */
     async getByField(field, value) {
-        try {
-            const query = {};
-            query[field] = value;
-            const result = await this.Model.findUnique({ where: query });
-            return result;
-        } catch (error) {
-            throw new Error('Failed to fetch');
-        }
+        const query = {};
+        query[field] = value;
+        const result = await this.Model.findUnique({ where: query });
+        return result;
     }
 
     /**
      * Handle update user to soft delete.
      * 
-     * @param {*} id - Id need to soft delete
-     * @returns 
+     * @param {*} id - Id need to soft delete.
+     * @returns - Deleted Record.
      */
     async softDeleteById(id) {
-        try {
-            const softDeleteUser = await this.Model.update({
-                where: {
-                    id,
-                },
-                data: {
-                    deleted: true,
-                }
-            });
-            
-            return softDeleteUser;
-        } catch (error) {
-            throw new Error('Failed to delete');
-        }
+        const softDeleteUser = await this.Model.update({
+            where: {
+                id,
+            },
+            data: {
+                deleted: true,
+            }
+        });
+
+        return softDeleteUser;
     }
 }
 

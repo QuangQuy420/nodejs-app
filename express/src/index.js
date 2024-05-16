@@ -2,6 +2,7 @@ import express from 'express';
 const app = express();
 const port = 3000;
 import userRoutes from '../src/app/routers/userRouter.js';
+import authRoutes from '../src/app/routers/authRouter.js';
 
 // Middleware to parse JSON request bodies.
 app.use(express.json());
@@ -10,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/users', userRoutes);
+app.use('/auth', authRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
