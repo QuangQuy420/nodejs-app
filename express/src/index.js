@@ -1,8 +1,12 @@
 import express from 'express';
-const app = express();
-const port = 3000;
 import userRoutes from '../src/app/routers/userRouter.js';
 import authRoutes from '../src/app/routers/authRouter.js';
+import cors from 'cors';
+
+const app = express();
+const port = 3000;
+
+app.use(cors()) // Use this after the variable declaration
 
 // Middleware to parse JSON request bodies.
 app.use(express.json());
